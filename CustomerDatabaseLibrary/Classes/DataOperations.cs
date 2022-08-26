@@ -163,6 +163,34 @@ namespace CustomerDatabaseLibrary.Classes
         }
 
         /// <summary>
+        /// Same as above with exception handling added
+        /// </summary>
+        /// <param name="customer"><see cref="Customer"/>Customer to insert</param>
+        /// <returns>success of operation and if an error the exception object</returns>
+        public static (bool success, Exception exception) InsertCustomer(Customer customer)
+        {
+
+            using var cn = new SqlConnection(ConfigurationHelper.ConnectionString());
+            using var cmd = new SqlCommand { Connection = cn, CommandText = SqlStatements1.AddNewCustomer };
+
+            cmd.Parameters.Add("@CompanyName", SqlDbType.NChar).Value = customer.CompanyName;
+            cmd.Parameters.Add("@ContactName", SqlDbType.NChar).Value = customer.ContactName;
+            cmd.Parameters.Add("@ContactTypeIdentifier", SqlDbType.Int).Value = customer.ContactTypeIdentifier;
+            cmd.Parameters.Add("@GenderIdentifier", SqlDbType.Int).Value = customer.GenderIdentifier;
+
+            try
+            {
+                cn.Open();
+                customer.Identifier = Convert.ToInt32(cmd.ExecuteScalar());
+                return (true, null);
+            }
+            catch (Exception localException)
+            {
+                return (false, localException);
+            }
+
+        }
+        /// <summary>
         /// Add more than one Customer record
         /// 
         /// When working with queries that have values set we need to add them
