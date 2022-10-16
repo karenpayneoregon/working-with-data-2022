@@ -16,6 +16,6 @@ namespace EntityFrameworkCore6App.Classes
                 .AddColumn("[b]Contact gender[/]")
                 .Alignment(Justify.Center)
                 .BorderColor(Color.Chartreuse1)
-                .Title("[LightGreen]Customers[/]");
+                .Title("[LightGreen]Customers with SortPropertyName[/]");
     }
 }

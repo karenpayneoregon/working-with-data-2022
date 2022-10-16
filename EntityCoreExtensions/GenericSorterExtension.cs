@@ -24,7 +24,7 @@ namespace EntityCoreExtensions
 		}
 
 
-		public static List<T> SortPropertyName<T>(this List<T> list, string propertyName, SortDirection sortDirection)
+		public static List<T> OrderByPropertyName<T>(this List<T> list, string propertyName, SortDirection sortDirection)
 		{
 
 			ParameterExpression param = Expression.Parameter(typeof(T), "item");
@@ -80,6 +80,21 @@ namespace EntityCoreExtensions
 			return (IOrderedQueryable<T>)source.Provider.CreateQuery<T>(orderByCall);
 
 		}
+        public static IOrderedQueryable<T> SortColumn<T>(this IQueryable<T> source, string propertyName, SortDirection sortOrder = SortDirection.Ascending)
+        {
+            var param = Expression.Parameter(typeof(T), string.Empty);
+            var expressionPropField = Expression.PropertyOrField(param, propertyName);
 
-	}
+            var sortExpression = Expression.Lambda(expressionPropField, param);
+
+            MethodCallExpression orderByCall =
+                Expression.Call(typeof(Queryable),
+                    "OrderBy" + (((sortOrder == SortDirection.Descending) ? "Descending" : string.Empty)),
+                    new[] { typeof(T), expressionPropField.Type },
+                    source.Expression, Expression.Quote(sortExpression));
+
+            return (IOrderedQueryable<T>)source.Provider.CreateQuery<T>(orderByCall);
+
+        }
+    }
 }

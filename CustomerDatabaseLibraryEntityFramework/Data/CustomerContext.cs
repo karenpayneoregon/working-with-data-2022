@@ -32,7 +32,8 @@ namespace CustomerDatabaseLibraryEntityFramework.Data
             if (!optionsBuilder.IsConfigured)
             {
                 // added by Karen
-                optionsBuilder.UseSqlServer(ConfigurationHelper.ConnectionString());
+                optionsBuilder.UseSqlServer(ConfigurationHelper.ConnectionString())
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             }
         }
 

@@ -13,7 +13,8 @@ namespace IndexRangeApp
         static void Main(string[] args)
         {
 
-            DataOperations.CustomersWithIncludes().Dump("Customers");
+            //DataOperations.CustomersWithIncludes().Dump("Customers");
+            Dump();
             Console.ReadLine();
         }
 

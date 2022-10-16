@@ -32,5 +32,8 @@
 	<ItemGroup>
 	  <Folder Include="assets\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\EntityCoreExtensions\EntityCoreExtensions.csproj" />
+	</ItemGroup>
 
 </Project>
