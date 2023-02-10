@@ -13,7 +13,8 @@ namespace DataUnitTestProject.Base
         Bogus,
         Verifications,
         DbContextExtensions,
-        OddBall
+        OddBall,
+        Navigations
     }
     /// <summary>
     /// Declarative class for using Trait enum about for traits on test method.

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DataUnitTestProject.Base;
 using DataUnitTestProject.Classes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NFluent;
 
 namespace DataUnitTestProject
 {

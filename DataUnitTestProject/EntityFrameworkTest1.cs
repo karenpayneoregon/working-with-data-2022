@@ -73,8 +73,8 @@ namespace DataUnitTestProject
             List<EF.Models.Customer> customers = EF.Classes.DataOperations.CustomersWithIncludes();
 
             // assert
-            customers.FirstOrDefault().ContactTypeIdentifierNavigation.Should().NotBeNull();
-            customers.FirstOrDefault().GenderIdentifierNavigation.Should().NotBeNull();
+            customers.FirstOrDefault()!.ContactTypeIdentifierNavigation.Should().NotBeNull();
+            customers.FirstOrDefault()!.GenderIdentifierNavigation.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -263,8 +263,8 @@ namespace DataUnitTestProject
         }
 
         [TestMethod]
-        [TestTraits(Trait.PlaceHolder)]
-        public void Temp()
+        [TestTraits(Trait.Navigations)]
+        public void CustomerNavigations()
         {
             EF.Classes.DataOperations.GetNavigationDetails();
             
