@@ -26,13 +26,23 @@ namespace DataUnitTestProject
             Check.That(genders.Count).Equals(3);
 
         }
-
+            
         [TestMethod]
         [TestTraits(Trait.AllRounds)]
         public void GetContactTypesTest()
         {
             var contactTypes = DataOperations.ContactTypesList();
+
             Check.That(contactTypes.Count).Equals(12);
+        }
+
+        [TestMethod]
+        [TestTraits(Trait.Dapper)]
+        public void DapperContactListTest()
+        {
+            var contactTypes = DataOperations.ContactTypesListDapper(1, 7);
+            var names = contactTypes.Select(ct => ct.ContactType).ToArray();
+            Check.That(names).IsOnlyMadeOf("Account Manager", "Owner");
         }
 
         [TestMethod]
@@ -41,7 +51,6 @@ namespace DataUnitTestProject
         {
             var customers = DataOperations.Customers();
             customers.Count.Should().BeGreaterOrEqualTo(8);
-
         }
 
         [TestMethod]

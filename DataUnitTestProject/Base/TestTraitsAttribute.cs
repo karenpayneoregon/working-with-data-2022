@@ -11,6 +11,7 @@ namespace DataUnitTestProject.Base
         AllRounds,
         FirstRound,
         Bogus,
+        Dapper,
         Verifications,
         DbContextExtensions,
         OddBall,

@@ -9,6 +9,7 @@ using CustomerDatabaseLibrary.Models;
 using ConfigurationLibrary.Classes;
 using DbLibrary.LanguageExtensions;
 using SqlCoreUtilityLibrary.Classes;
+using Dapper;
 
 namespace CustomerDatabaseLibrary.Classes
 {
@@ -48,6 +49,8 @@ namespace CustomerDatabaseLibrary.Classes
             return list.ToImmutableList();
         }
 
+
+
         /// <summary>
         /// Read all Contact types in the database
         /// </summary>
@@ -67,6 +70,13 @@ namespace CustomerDatabaseLibrary.Classes
             }
 
             return list.ToImmutableList();
+        }
+
+
+        public static IReadOnlyList<ContactTypes> ContactTypesListDapper(params int[] identifiers)
+        {
+            using var cn = new SqlConnection(ConfigurationHelper.ConnectionString());
+            return cn.Query<ContactTypes>(SqlStatements1.GetContactTypesWhereIn, new { Identifiers = identifiers }).ToImmutableList();
         }
 
         /// <summary>

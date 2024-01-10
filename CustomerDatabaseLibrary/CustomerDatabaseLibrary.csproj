@@ -6,7 +6,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="ConfigurationLibrary" Version="1.0.1" />
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+		<PackageReference Include="Dapper" Version="2.1.28" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\DbLibrary\DbLibrary.csproj" />

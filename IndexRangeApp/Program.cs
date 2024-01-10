@@ -14,7 +14,30 @@ namespace IndexRangeApp
         {
 
             //DataOperations.CustomersWithIncludes().Dump("Customers");
-            Dump();
+            List<Container<string>> monthContainers = RangeHelpers.RangeDetails(RangeHelpers.MonthNames());
+            StringBuilder builder = new();
+            foreach (var container in monthContainers)
+            {
+                builder.AppendLine($" {container.Value,-12} {container.StartIndex,-6} {container.EndIndex,-7}{container.MonthIndex}");
+            }
+
+            Console.WriteLine(" Month        Start  End    Month Index");
+            Console.WriteLine("              range  range  index");
+            Console.WriteLine(builder);
+
+
+            Console.WriteLine();
+
+            var dayContainers = RangeHelpers.RangeDetails(RangeHelpers.DayNames());
+            builder = new();
+            foreach (var container in dayContainers)
+            {
+                builder.AppendLine($" {container.Value,-12} {container.StartIndex,-6} {container.EndIndex,-7}{container.MonthIndex}");
+            }
+            Console.WriteLine(" Day          Start  End    Day Index");
+            Console.WriteLine("              range  range  index");
+            Console.WriteLine(builder);
+
             Console.ReadLine();
         }
 
@@ -32,25 +55,26 @@ namespace IndexRangeApp
             }
 
             List<int> integerList = new() { 1, 2, 3, 4, 5 };
-            var integerContainers = Helpers.RangeDetails(integerList);
+            //var integerContainers = Helpers.RangeDetails(integerList);
 
-            Console.WriteLine("Start End  Value");
-            foreach (var container in integerContainers)
-            {
-                Console.WriteLine($"{container.StartIndex,-3}{container.EndIndex,5}{container.Value,5}");
-            }
+            //Console.WriteLine("Start End  Value");
+            //foreach (var container in integerContainers)
+            //{
+            //    Console.WriteLine($"{container.StartIndex,-3}{container.EndIndex,5}{container.Value,5}");
+            //}
 
             Console.WriteLine();
-            var stringContainers = Helpers.RangeDetails(Helpers.MonthNames());
+            var stringContainers = RangeHelpers.RangeDetails(RangeHelpers.MonthNames());
             StringBuilder builder = new();
             foreach (var container in stringContainers)
             {
-                builder.AppendLine($"{container.Value,-12} {container.StartIndex,-6} {container.EndIndex}");
+                builder.AppendLine($" {container.Value,-12} {container.StartIndex,-6} {container.EndIndex, -7}{container.MonthIndex}");
             }
 
-            Console.WriteLine("Month        Start  End");
+            Console.WriteLine(" Month        Start  End    Month Index");
+            Console.WriteLine("              range  range  index");
             Console.WriteLine(builder);
-
+            return;
 
             Console.WriteLine();
             List<int> list = new() { 1, 2, 3, 4, 5 };
@@ -99,30 +123,34 @@ namespace IndexRangeApp
         }
     }
 
-    public class ElementContainer<T>
+    public class Container<T>
     {
-        public T Value { get; set; }
+        public T? Value { get; set; }
         public Index StartIndex { get; set; }
+        public int MonthIndex { get; set; }
         public Index EndIndex { get; set; }
     }
 
-    class Helpers
+    class RangeHelpers
     {
-        public static List<string> MonthNames()
-            => CurrentInfo!.MonthNames[..^1].ToList();
+        public static List<string> MonthNames() => CurrentInfo!.MonthNames[..^1].ToList();
+        public static List<string> DayNames() => CurrentInfo!.DayNames.ToList();
 
-        public static List<ElementContainer<T>> RangeDetails<T>(List<T> list)
+        public static List<Container<T>> RangeDetails<T>(List<T> list)
         {
-            var elementsList = list.Select((element, index) => new ElementContainer<T>
+            var elementsList = list.Select((element, index) => new Container<T>
             {
                 Value = element,
                 StartIndex = new Index(index),
-                EndIndex = new Index(Enumerable.Range(0, list.Count).Reverse().ToList()[index], true)
+                EndIndex = new Index(Enumerable.Range(0, list.Count).Reverse().ToList()[index], 
+                    true),
+                MonthIndex = index +1
             }).ToList();
 
             return elementsList;
         }
     }
+
     public static class StringExtensions
     {
         public static string ToYesNo(this bool value)

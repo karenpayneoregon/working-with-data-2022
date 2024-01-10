@@ -20,6 +20,9 @@
         public static string GetContactTypes => 
             "SELECT Identifier, ContactType FROM dbo.ContactTypes;";
 
+        public static string GetContactTypesWhereIn =>
+            "SELECT Identifier, ContactType FROM dbo.ContactTypes WHERE Identifier IN @Identifiers";
+
         /// <summary>
         /// Used to get all ContactType records, insert a Select option at first position
         /// </summary>
