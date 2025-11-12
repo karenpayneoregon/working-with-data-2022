@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ConfigurationLibrary.Classes;
 using CustomerDatabaseLibrary.Classes;
 using CustomerDatabaseLibrary.Models;
+using Microsoft.Data.SqlClient;
 
 namespace DataUnitTestProject.Base
 {

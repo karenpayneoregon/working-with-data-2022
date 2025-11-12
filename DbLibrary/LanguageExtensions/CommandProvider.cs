@@ -1,10 +1,9 @@
-﻿namespace DbLibrary.LanguageExtensions
+﻿namespace DbLibrary.LanguageExtensions;
+
+public enum CommandProvider
 {
-    public enum CommandProvider
-    {
-        SqlServer,
-        Access,
-        SqLite,
-        Oracle
-    }
+    SqlServer,
+    Access,
+    SqLite,
+    Oracle
 }

@@ -1,17 +1,15 @@
-﻿using System;
+﻿
+namespace EntityCoreExtensions.Classes;
 
-namespace EntityCoreExtensions.Classes
+public class InvalidEntityStateException : Exception
 {
-    public class InvalidEntityStateException : Exception
+    public InvalidEntityStateException() { }
+
+    public InvalidEntityStateException(string message) : base(message)
     {
-        public InvalidEntityStateException() { }
+    }
 
-        public InvalidEntityStateException(string message) : base(message)
-        {
-        }
-
-        public InvalidEntityStateException(string message, Exception inner) : base(message, inner)
-        {
-        }
+    public InvalidEntityStateException(string message, Exception inner) : base(message, inner)
+    {
     }
 }

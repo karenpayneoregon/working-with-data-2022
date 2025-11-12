@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConfigurationLibrary.Classes;
 using CustomerDatabaseLibraryEntityFramework.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using CustomerDatabaseLibrary.Models;
 using ConfigurationLibrary.Classes;
 using DbLibrary.LanguageExtensions;
 using SqlCoreUtilityLibrary.Classes;
 using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace CustomerDatabaseLibrary.Classes
 {
@@ -71,8 +67,7 @@ namespace CustomerDatabaseLibrary.Classes
 
             return list.ToImmutableList();
         }
-
-
+        
         public static IReadOnlyList<ContactTypes> ContactTypesListDapper(params int[] identifiers)
         {
             using var cn = new SqlConnection(ConfigurationHelper.ConnectionString());
@@ -135,6 +130,7 @@ namespace CustomerDatabaseLibrary.Classes
                     ContactTypeIdentifier = reader.GetInt32(3),
                     GenderIdentifier = reader.GetInt32(4)
                 };
+
                 return customer;
             }
             else
